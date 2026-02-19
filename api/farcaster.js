@@ -15,7 +15,13 @@ export default async function handler(req, res) {
   try {
     const cast = req.body.data;
 
+    // Only your casts
     if (cast.author.fid !== 431880) {
+      return res.status(200).end();
+    }
+    
+    // Ignore replies
+    if (cast.parent_hash) {
       return res.status(200).end();
     }
 
